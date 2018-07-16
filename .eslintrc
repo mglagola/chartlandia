@@ -1,0 +1,49 @@
+{
+  "parser"  : "babel-eslint",
+  "extends" : [
+    "standard",
+    "standard-react"
+  ],
+  "plugins": [
+    "babel",
+    "react",
+    "promise",
+    "jsx-a11y",
+    "jest"
+  ],
+  "env"     : {
+    "browser" : true,
+    "jest/globals": true
+  },
+  "globals" : {
+    "__DEV__"      : false,
+    "__PROD__"     : false,
+    "__DEBUG__"    : false,
+    "__COVERAGE__" : false,
+    "__BASENAME__" : false
+  },
+  "rules": {
+    "key-spacing" : [2, {
+      "singleLine" : {
+        "beforeColon" : false,
+        "afterColon"  : true
+      },
+      "multiLine" : {
+        "beforeColon" : false,
+        "afterColon"  : true
+      }
+    }],
+    "max-len"                      : 0,
+    "react/prop-types"             : 0,
+    "babel/generator-star-spacing" : 1,
+    "generator-star-spacing"       : 0,
+    "jsx-quotes"                   : [2, "prefer-single"],
+    "object-curly-spacing"         : [2, "always"],
+    "semi"                         : [2, "always"],
+    "indent"                       : ["error", 4],
+    "react/jsx-indent"             : ["error", 4],
+    "comma-dangle"                 : ["error", "always-multiline"],
+    "no-fallthrough"               : 0,
+    "react/jsx-indent-props"       : 0
+  }
+}

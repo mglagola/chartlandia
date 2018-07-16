@@ -1,0 +1,115 @@
+after_script:
+  - exp logout
+
+cache:
+  untracked: true
+  key: "$CI_COMMIT_SHA"
+  paths:
+    - node_modules/
+
+stages:
+  - docker-build
+  - docker-push
+  - deploy-prod
+  - teardown-web
+  - setup-native
+  - publish-default
+  - publish-production
+  - build-ios-ipa
+  - deploy-to-ios-test-flight
+
+docker-build:
+  stage: docker-build
+  script:
+    - docker build --build-arg RELEASE_CHANNEL=production -t $DOCKER_REPO .
+  only:
+    - master
+  tags:
+    - mac
+
+docker-push:
+  stage: docker-push
+  script:
+    - docker push $DOCKER_REPO
+  only:
+    - master
+  tags:
+    - mac
+
+deploy-prod:
+  stage: deploy-prod
+  script:
+    - eval $(docker-machine env chartlandia)
+    - docker pull $DOCKER_REPO
+    - docker stop web || true
+    - docker rm web || true
+    - docker run -p 5000:5000 -d --name web $DOCKER_REPO
+    - eval $(docker-machine env -u)
+  only:
+    - master
+  tags:
+    - mac
+
+teardown-web:
+  stage: teardown-web
+  script:
+    - docker system prune -a -f
+    - eval $(docker-machine env -u)
+  only:
+    - master
+  tags:
+    - mac
+
+setup-native:
+  stage: setup-native
+  script:
+    - npm install
+  only:
+    - master
+    - tags
+  tags:
+    - mac
+
+publish-default:
+  stage: publish-default
+  script:
+    - npm run pre:native
+    - exp login -u $EXPO_USERNAME -p $EXPO_PASSWORD --non-interactive
+    - exp publish --non-interactive
+  only:
+    - master
+  tags:
+    - mac
+
+publish-production:
+  stage: publish-production
+  script:
+    - npm run pre:native
+    - exp login -u $EXPO_USERNAME -p $EXPO_PASSWORD --non-interactive
+    - exp publish --release-channel production --non-interactive
+  only:
+    - tags
+  tags:
+    - mac
+
+build-ios-ipa:
+  stage: build-ios-ipa
+  script:
+    - npm run pre:native
+    - exp login -u $EXPO_USERNAME -p $EXPO_PASSWORD --non-interactive
+    - exp build:ios --release-channel production --non-interactive --no-publish
+  only:
+    - tags
+  tags:
+    - mac
+
+deploy-to-ios-test-flight:
+  stage: deploy-to-ios-test-flight
+  script:
+    - exp login -u $EXPO_USERNAME -p $EXPO_PASSWORD --non-interactive
+    - curl -o app.ipa "$(exp url:ipa --non-interactive)"
+    - fastlane deliver --verbose --ipa "app.ipa" --username "$FASTLANE_EMAIL" --skip_screenshots --skip_metadata
+  only:
+    - tags
+  tags:
+    - mac
