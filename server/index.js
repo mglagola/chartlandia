@@ -52,6 +52,8 @@ async function start () {
     await app.prepare();
     const server = express();
 
+    server.use(express.static('assets'));
+
     server.get('/api/v1/market-cap', tryCatchWrap(async (req, res) => {
         const marketCap = await CoinMarketCap.fetchMarketCap();
         return res.jsonp({ marketCap });
