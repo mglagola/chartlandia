@@ -21,7 +21,7 @@
       "supportsTablet": true,
       "icon": "./assets/icon.png",
       "bundleIdentifier": "gl.mark.Chartlandia",
-      "buildNumber": "1",
+      "buildNumber": "2",
       "config": {
         "usesNonExemptEncryption": false
       }
@@ -29,7 +29,7 @@
     "android": {
       "icon": "./assets/icon.png",
       "package": "gl.mark.Chartlandia",
-      "versionCode": 1
+      "versionCode": 2
     }
   }
 }

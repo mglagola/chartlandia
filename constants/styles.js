@@ -1,6 +1,7 @@
 import { Platform, StyleSheet } from 'react-native';
 
-const primaryColorWithAlpha = (alpha) => `rgba(39, 174, 96, ${alpha})`;
+// const primaryColorWithAlpha = (alpha) => `rgba(39, 174, 96, ${alpha})`;
+const primaryColorWithAlpha = (alpha) => `rgba(251, 171, 126, ${alpha})`;
 const primaryColor = primaryColorWithAlpha(1);
 
 const lightColor = 'rgb(236, 240, 241)';
@@ -15,6 +16,8 @@ const shadeColor = (s = 0.5) => {
 };
 
 export const ProgressBarStyles = {
+    backgroundColor: '#FBAB7E',
+    background: 'linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%)',
     color: primaryColor,
 };
 

@@ -15,7 +15,8 @@ const ProgressBar = () => (
             pointer-events: none;
         }
         #nprogress .bar {
-            background: ${ProgressBarStyles.color};
+            background-color: ${ProgressBarStyles.background};
+            background: ${ProgressBarStyles.backgroundColor};
             position: fixed;
             z-index: 1031;
             top: 0;
@@ -29,7 +30,7 @@ const ProgressBar = () => (
             right: 0px;
             width: 100px;
             height: 100%;
-            box-shadow: 0 0 10px ${ProgressBarStyles.color}, 0 0 5px ${ProgressBarStyles.color};
+            box-shadow: 0 0 10px ${ProgressBarStyles.backgroundColor}, 0 0 5px ${ProgressBarStyles.backgroundColor};
             opacity: 1.0;
             -webkit-transform: rotate(3deg) translate(0px, -4px);
                 -ms-transform: rotate(3deg) translate(0px, -4px);
