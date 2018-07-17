@@ -3,6 +3,7 @@ import {
     View,
     FlatList,
     StyleSheet,
+    RefreshControl,
 } from 'react-native';
 import { AppStyles, NavigationStyles } from '../constants/styles';
 import {
@@ -18,6 +19,8 @@ const Feed = ({
     ss,
     marketCap,
     listData,
+    fetchStatus,
+    onRefresh,
 }) => (
     <View style={styles.container}>
         <FeedHeader
@@ -41,6 +44,12 @@ const Feed = ({
             data={listData}
             renderItem={(({ item, index }) => <FeedCell ss={ss} index={index} {...item} />)}
             ItemSeparatorComponent={FeedItemSeparatorComponent}
+            refreshControl={
+                <RefreshControl
+                    refreshing={fetchStatus === 'loading'}
+                    onRefresh={onRefresh}
+                />
+            }
         />
         <FeedFooter ss={ss} marketCap={marketCap} />
     </View>
