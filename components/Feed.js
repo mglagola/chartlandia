@@ -19,7 +19,7 @@ const FeedItemSeparatorComponent = () => <View style={styles.itemSeparator} />;
 const shouldShowList = (fetchStatus) => {
     if (Platform.OS !== 'web') return true;
     return fetchStatus !== 'loading';
-}
+};
 
 const Feed = ({
     deviceSize,
@@ -56,7 +56,7 @@ const Feed = ({
             ItemSeparatorComponent={FeedItemSeparatorComponent}
             refreshControl={
                 <RefreshControl
-                    refreshing={fetchStatus === 'loading'}
+                    refreshing={Platform.OS !== 'ios' && fetchStatus === 'loading'}
                     onRefresh={onRefresh}
                 />
             }

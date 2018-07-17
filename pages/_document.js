@@ -76,7 +76,7 @@ export default class MyDocument extends Document {
                     <meta name='viewport' content='width=device-width, initial-scale=1' />
                     <meta name="msapplication-TileColor" content="#ffffff" />
                     <meta name="msapplication-TileImage" content="/public/ms-icon-144x144.png" />
-                    <meta name="theme-color" content="#34495e" />
+                    <meta name="theme-color" content={AppStyles.defaultBackgroundColor} />
                     <link rel="apple-touch-icon" sizes="57x57" href="/public/apple-icon-57x57.png" />
                     <link rel="apple-touch-icon" sizes="60x60" href="/public/apple-icon-60x60.png" />
                     <link rel="apple-touch-icon" sizes="72x72" href="/public/apple-icon-72x72.png" />

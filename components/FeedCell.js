@@ -205,15 +205,21 @@ const ms = {
     }],
     change: [{
         when: 'lte',
-        width: 640,
-        style: {
-            flex: 0.9,
-        },
-    }, {
-        when: 'lte',
         width: 940,
         style: {
             flex: 1,
+        },
+    }, {
+        when: 'lte',
+        width: 670,
+        style: {
+            flex: 0.7,
+        },
+    }, {
+        when: 'lte',
+        width: 640,
+        style: {
+            flex: 0.9,
         },
     }],
     change1h: [{

@@ -13,7 +13,6 @@ const mapStateToProps = (state, ownProps) => {
     const marketCap = F.get(['Feed', 'result', 'marketCap'], state);
     const tickers = F.get(['Feed', 'result', 'result'], state);
     const fetchStatus = F.get(['Feed', 'status'], state);
-    console.log(fetchStatus);
     return {
         fetchStatus,
         tickers,
