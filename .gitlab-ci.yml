@@ -21,7 +21,7 @@ stages:
 docker-build:
   stage: docker-build
   script:
-    - docker build --build-arg RELEASE_CHANNEL=production -t $DOCKER_REPO .
+    - docker build --build-arg RELEASE_CHANNEL=production --build-arg GOOGLE_ANALYTICS_ID=$GOOGLE_ANALYTICS_ID -t $DOCKER_REPO .
   only:
     - master
   tags:

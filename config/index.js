@@ -3,7 +3,7 @@
 export default {
     web: {
         defaultHtmlTitle: 'Chartlandia',
-        googleAnalyticsId: null,
+        googleAnalyticsId: process.env.GOOGLE_ANALYTICS_ID || null,
         prodApiURL: '',
         devApiURL: 'http://localhost:3000',
     },
