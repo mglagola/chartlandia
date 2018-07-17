@@ -57,22 +57,9 @@ export const SplashStyles = {
     rightContainerBackgroundColor: undefined,
 };
 
-export const AuthStyles = {
-    large: {
-        backgroundColor: defaultBackgroundColor,
-        inputTextColor: 'black',
-        inputPlaceholderTextColor: '#aaa',
-        inputBorderColor: '#ddd',
-        inputContainerBackgroundColor: lightColor,
-        nextButtonColor: primaryColor,
-        inputHeaderSeparatorColor: 'black',
-    },
-    small: {
-        backgroundColor: primaryColor,
-        inputTextColor: lightColor,
-        inputPlaceholderTextColor: lightColorWithAlpha(0.65),
-        inputBorderColor: lightColorWithAlpha(0.65),
-        nextButtonColor: lightColorWithAlpha(0.05),
+export const FeedStyles = {
+    layout: {
+        maxContentWidth: 1600,
     },
 };
 
