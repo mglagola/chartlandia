@@ -4,8 +4,10 @@ import {
     FlatList,
     StyleSheet,
     RefreshControl,
+    ActivityIndicator,
+    Platform,
 } from 'react-native';
-import { AppStyles, NavigationStyles } from '../constants/styles';
+import { AppStyles, ProgressBarStyles, NavigationStyles } from '../constants/styles';
 import {
     FeedCell,
     FeedHeader,
@@ -13,6 +15,11 @@ import {
 } from '../components/FeedCell';
 
 const FeedItemSeparatorComponent = () => <View style={styles.itemSeparator} />;
+
+const shouldShowList = (fetchStatus) => {
+    if (Platform.OS !== 'web') return true;
+    return fetchStatus !== 'loading';
+}
 
 const Feed = ({
     deviceSize,
@@ -35,7 +42,10 @@ const Feed = ({
             change24h='Change (24h)'
             change7d='Change (7d)'
         />
-        <FlatList
+        {Platform.OS === 'web' && fetchStatus === 'loading' && <View style={styles.loadingIndicagtorContainer}>
+            <ActivityIndicator size='large' color={ProgressBarStyles.color} />
+        </View>}
+        {shouldShowList(fetchStatus) && <FlatList
             removeClippedSubviews
             disableVirtualization
             style={styles.list}
@@ -50,7 +60,7 @@ const Feed = ({
                     onRefresh={onRefresh}
                 />
             }
-        />
+        />}
         <FeedFooter ss={ss} marketCap={marketCap} />
     </View>
 );
@@ -66,6 +76,11 @@ const styles = StyleSheet.create({
     itemSeparator: {
         height: StyleSheet.hairlineWidth,
         backgroundColor: NavigationStyles.borderColor,
+    },
+    loadingIndicagtorContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
 
