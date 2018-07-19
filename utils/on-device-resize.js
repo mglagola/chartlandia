@@ -28,7 +28,7 @@ export default () => (WrappedComponent) => {
 
         render () {
             const { deviceSize } = this.state;
-            return <WrappedComponent deviceSize={bodySize()} {...this.props} />;
+            return <WrappedComponent deviceSize={deviceSize} {...this.props} />;
         }
     };
 };

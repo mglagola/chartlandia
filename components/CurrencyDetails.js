@@ -1,6 +1,7 @@
 import React from 'react';
 import {
     View,
+    ScrollView,
     StyleSheet,
 } from 'react-native';
 import { AppStyles, CurrencyDetailsStyles, NavigationStyles } from '../constants/styles';
@@ -21,68 +22,75 @@ const CurrencyDetails = ({
     currency,
 }) => (
     <View style={styles.container}>
-        <View style={styles.innerContainer}>
-            <View style={styles.section}>
-                {row(
-                    [
-                        <Text style={[styles.title, ss(ms.title)]} key='1'>{currency.name}</Text>,
-                        <Text style={[styles.titleSymbol, ss(ms.title)]} key='2'>{currency.symbol}</Text>,
-                    ],
-                    [
-                        <Text style={styles.price} key='1'>${formatNumber(currency.price_usd, 3)}</Text>,
-                        <Change style={styles.changeTitle} change={currency.percent_change_24h} key='2' />,
-                    ],
-                )}
+        <ScrollView contentContainerStyle={styles.scrollView}>
+            <View style={styles.innerContainer}>
+                <View style={styles.section}>
+                    {row(
+                        [
+                            <Text style={[styles.title, ss(ms.title)]} key='1'>{currency.name}</Text>,
+                            <Text style={[styles.titleSymbol, ss(ms.title)]} key='2'>{currency.symbol}</Text>,
+                        ],
+                        [
+                            <Text style={styles.price} key='1'>${formatNumber(currency.price_usd, 3)}</Text>,
+                            <Change style={styles.changeTitle} change={currency.percent_change_24h} key='2' />,
+                        ],
+                    )}
+                </View>
+                <View style={styles.section}>
+                    {row(
+                        [
+                            <Text style={[styles.itemText, ss(ms.itemText)]} key='1'>Market Cap</Text>,
+                            <Text style={[styles.itemText, ss(ms.itemText), styles.itemSubtitle]} key='2'>#{currency.rank} USD</Text>,
+                        ],
+                        [
+                            <Text style={[styles.itemText, ss(ms.itemText)]} key='1'>${formatNumber(currency.market_cap_usd, 0)}</Text>,
+                        ],
+                    )}
+                    <View style={styles.separator} />
+                    {row(
+                        [
+                            <Text style={[styles.itemText, ss(ms.itemText)]} key='1'>Volume (24h)</Text>,
+                            <Text style={[styles.itemText, ss(ms.itemText), styles.itemSubtitle]} key='2'>USD</Text>,
+                        ],
+                        [
+                            <Text style={[styles.itemText, ss(ms.itemText)]} key='1'>${formatNumber(currency.volume_usd_24h, 0)}</Text>,
+                        ],
+                    )}
+                    <View style={styles.separator} />
+                    {row(
+                        <Text style={[styles.itemText, ss(ms.itemText)]} key='1'>Circulating Supply</Text>,
+                        <Text style={[styles.itemText, ss(ms.itemText)]} key='1'>{formatNumber(currency.available_supply, 0)}</Text>,
+                    )}
+                </View>
+                <View style={styles.section}>
+                    {row(
+                        <Text style={[styles.itemText, ss(ms.itemText)]} key='1'>Change (1h)</Text>,
+                        <Change style={[styles.itemText, ss(ms.itemText)]} change={currency.percent_change_1h} key='1' />,
+                    )}
+                    <View style={styles.separator} />
+                    {row(
+                        <Text style={[styles.itemText, ss(ms.itemText)]} key='1'>Change (24h)</Text>,
+                        <Change style={[styles.itemText, ss(ms.itemText)]} change={currency.percent_change_24h} key='1' />,
+                    )}
+                    <View style={styles.separator} />
+                    {row(
+                        <Text style={[styles.itemText, ss(ms.itemText)]} key='1'>Change (7d)</Text>,
+                        <Change style={[styles.itemText, ss(ms.itemText)]} change={currency.percent_change_7d} key='1' />,
+                    )}
+                </View>
             </View>
-            <View style={styles.section}>
-                {row(
-                    [
-                        <Text style={[styles.itemText, ss(ms.itemText)]} key='1'>Market Cap</Text>,
-                        <Text style={[styles.itemText, ss(ms.itemText), styles.itemSubtitle]} key='2'>#{currency.rank} USD</Text>,
-                    ],
-                    [
-                        <Text style={[styles.itemText, ss(ms.itemText)]} key='1'>${formatNumber(currency.market_cap_usd, 0)}</Text>,
-                    ],
-                )}
-                <View style={styles.separator} />
-                {row(
-                    [
-                        <Text style={[styles.itemText, ss(ms.itemText)]} key='1'>Volume (24h)</Text>,
-                        <Text style={[styles.itemText, ss(ms.itemText), styles.itemSubtitle]} key='2'>USD</Text>,
-                    ],
-                    [
-                        <Text style={[styles.itemText, ss(ms.itemText)]} key='1'>${formatNumber(currency.volume_usd_24h, 0)}</Text>,
-                    ],
-                )}
-                <View style={styles.separator} />
-                {row(
-                    <Text style={[styles.itemText, ss(ms.itemText)]} key='1'>Circulating Supply</Text>,
-                    <Text style={[styles.itemText, ss(ms.itemText)]} key='1'>{formatNumber(currency.available_supply, 0)}</Text>,
-                )}
-            </View>
-            <View style={styles.section}>
-                {row(
-                    <Text style={[styles.itemText, ss(ms.itemText)]} key='1'>Change (1h)</Text>,
-                    <Change style={[styles.itemText, ss(ms.itemText)]} change={currency.percent_change_1h} key='1' />,
-                )}
-                <View style={styles.separator} />
-                {row(
-                    <Text style={[styles.itemText, ss(ms.itemText)]} key='1'>Change (24h)</Text>,
-                    <Change style={[styles.itemText, ss(ms.itemText)]} change={currency.percent_change_24h} key='1' />,
-                )}
-                <View style={styles.separator} />
-                {row(
-                    <Text style={[styles.itemText, ss(ms.itemText)]} key='1'>Change (7d)</Text>,
-                    <Change style={[styles.itemText, ss(ms.itemText)]} change={currency.percent_change_7d} key='1' />,
-                )}
-            </View>
-        </View>
+        </ScrollView>
     </View>
 );
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: AppStyles.defaultBackgroundColor,
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+    scrollView: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'center',

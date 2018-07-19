@@ -35,6 +35,11 @@ export default {
             statusBarStyle: 'light-content',
             path: [['/currency?slug={slug}', '/currencies/{slug}']],
         },
+        Splash: {
+            screen: null, // won't show up on native
+            statusBarStyle: 'light-content',
+            path: '/about',
+        },
     },
     routesMeta: {
         initialRouteName: 'Feed',
